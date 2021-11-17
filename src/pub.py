@@ -23,6 +23,13 @@ class Pub:
     def increase_till(self, amount):
         self.till += amount
 
+    def drink_count(self):
+        return len(self.drinks)
+
+    def food_count(self):
+        return len(self.food)
+    
+
     def serve_drink(self, customer, drink):
         if customer.age >= 18 and customer.drunkenness < 12:
             self.increase_till(drink.price)

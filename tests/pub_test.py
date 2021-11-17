@@ -22,6 +22,33 @@ class TestPub(unittest.TestCase):
     def test_pub_has_drinks(self):
         self.assertEqual([],self.pub.drinks)
 
+    def test_pub_can_add_and_remove_drinks(self):
+        self.pub.add_drink(self.drink_1)
+        self.pub.add_drink(self.drink_2)
+        self.pub.remove_drink(self.drink_1)
+        self.assertIn(self.drink_2, self.pub.drinks)
+        self.assertNotIn(self.drink_1, self.pub.drinks)
+
+    def test_pub_can_add_and_remove_food(self):
+        self.pub.add_food(self.food_1)
+        self.pub.add_food(self.food_2)
+        self.pub.remove_food(self.food_1)
+        self.assertIn(self.food_2, self.pub.food)
+        self.assertNotIn(self.food_1, self.pub.drinks)
+
+    def test_increase_till(self):
+        self.pub.increase_till(2.50)
+        expected = 102.50
+        actual = self.pub.till
+        self.assertEqual(expected, actual)
+
+    def test_drink_count(self):
+        self.assertEqual(0, self.pub.drink_count())
+
+    def test_food_count(self):
+        self.assertEqual(0, self.pub.food_count())
+
+
     def test_pub_can_serve_drink__old_enough(self):
         customer_1 = Customer("Mary", 5.60, 30, 3)
         self.pub.add_drink(self.drink_1)
@@ -45,10 +72,6 @@ class TestPub(unittest.TestCase):
         self.assertNotIn(self.drink_1, self.pub.food)
 
     
-    def test_increase_till(self):
-        self.pub.increase_till(2.50)
-        expected = 102.50
-        actual = self.pub.till
-        self.assertEqual(expected, actual)
+    
 
     
