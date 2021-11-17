@@ -1,10 +1,12 @@
 import unittest
 from src.pub import Pub
+from src.customer import Customer
+from src.drink import Drink
 
 class TestPub(unittest.TestCase):
 
     def setUp(self):
-        self.pub = Pub("The Prancing Pony", 100.00,["beer", "wine", "vodka"])
+        self.pub = Pub("The Prancing Pony", 100.00,[])
 
     def test_pub_has_name(self):
         self.assertEqual("The Prancing Pony", self.pub.name)
@@ -13,7 +15,15 @@ class TestPub(unittest.TestCase):
         self.assertEqual(100.00,self.pub.till)
     
     def test_pub_has_drinks(self):
-        self.assertEqual(["beer", "wine", "vodka"],self.pub.drinks)
+        self.assertEqual([],self.pub.drinks)
+
+    def test_pub_can_serve(self):
+        customer_1 = Customer("Mary", 5.60)
+        drink_1 = Drink("Coke", 2.50)
+        self.pub.drinks.append(drink_1)
+        self.pub.serve(customer_1, drink_1)
+        self.assertEqual(102.50, self.pub.till)
+        self.assertNotIn(drink_1,self.pub.drinks)
 
 
     #@unittest.skip
