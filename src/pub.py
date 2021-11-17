@@ -12,6 +12,10 @@ class Pub:
         self.till += amount
 
     def serve(self, customer, drink):
-        self.till += drink.price 
-        self.drinks.remove(drink)
-        customer.buy_drink(drink)
+        if customer.age >= 18 and customer.drunkenness < 12:
+            self.increase_till(drink.price)
+            self.drinks.remove(drink)
+            customer.buy_drink(drink)
+
+        else: 
+            return "no sale"
